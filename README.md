@@ -20,6 +20,7 @@ To use System-Admin-Helper, simply run the desired script from the command line.
 The script will prompt you for the necessary information using whiptail.
 
 ## Scripts
+
 The following scripts are included in System-Admin-Helper:
 
 - add_user - Adds a new user.
@@ -35,7 +36,8 @@ The following scripts are included in System-Admin-Helper:
 [damon@localhost ~]$ sudo dnf install newt
 ```
 # GUI
-https://github.com/mostafa-magdi/System-Admin-Helper/assets/129240702/c70f9d39-6f21-4f44-be65-38618a11aecd
+https://github.com/mostafa-magdi/Syestem-Admin-Helper/assets/129240702/68d335c8-7c3b-4405-b1de-9867c8ee8471
 
 # Conclusion
+
 System-Admin-Helper is a useful collection of shell script files that can help Linux users manage users and groups. The scripts are easy to use and provide an interactive interface using whiptail

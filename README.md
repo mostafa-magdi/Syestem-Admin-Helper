@@ -39,5 +39,5 @@ The following scripts are included in System-Admin-Helper:
 https://github.com/mostafa-magdi/Syestem-Admin-Helper/assets/129240702/68d335c8-7c3b-4405-b1de-9867c8ee8471
 
 # Conclusion
+- System-Admin-Helper is a simple GUI that help Linux administrator to manage there users and groups based on a collection of shell script files The scripts use whiptail to provide an interactive user interface.
 
-System-Admin-Helper is a useful collection of shell script files that can help Linux users manage users and groups. The scripts are easy to use and provide an interactive interface using whiptail

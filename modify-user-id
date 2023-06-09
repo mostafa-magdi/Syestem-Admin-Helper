@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Get the username from the user using whiptail
+username=$(whiptail --inputbox "Enter the username:" 8 78 --title "Modify User ID" 3>&1 1>&2 2>&3)
+
+# Get the new user ID from the user using whiptail
+new_uid=$(whiptail --inputbox "Enter the new user ID:" 8 78 --title "Modify User ID" 3>&1 1>&2 2>&3)
+
+# Check if the user exists
+if id "$username" >/dev/null 2>&1; then
+    # Modify the user ID
+    sudo usermod -u $new_uid $username
+    whiptail --title "Modify User ID" --msgbox "User $username has been modified." 8 78
+else
+    whiptail --title "Modify User ID" --msgbox "User $username does not exist." 8 78
+
+fi

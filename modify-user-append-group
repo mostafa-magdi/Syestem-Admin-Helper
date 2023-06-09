@@ -1,0 +1,31 @@
+#!/bin/bash
+
+appendgroup=$(whiptail --inputbox "Enter group name" 8 39 --title "User Modify" 3>&1 1>&2 2>&3)
+
+exitstatus=$?
+if [ $exitstatus = 0 ]; then
+
+###Check if input is empty###
+        if [ -z "$appendgroup" ]
+        then
+            	whiptail --title "OOPS" --msgbox "Invalid Input :(" 8 78
+                ./menu
+        fi
+
+###Check Group Existense###
+
+        sudo getent group $appendgroup &> /dev/null
+        if [ $? = 0 ]; then
+        sudo usermod -aG "$appendgroup" $username &> /dev/null 
+        whiptail --title "DONE" --msgbox "Group $appendgroup is added to groups of user $username" 8 78
+         ./menu
+        else
+	whiptail --title "DONE" --msgbox "Group $appendgroup is not existed" 8 78
+	./menu
+        fi
+
+else
+    ./menu
+fi
+
+

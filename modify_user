@@ -1,0 +1,53 @@
+#!/bin/bash
+
+###Enter Username you want to modify here####
+username=$(whiptail --inputbox "Enter a user you want to Modify" 8 39 --title "Modify User" 3>&1 1>&2 2>&3)
+
+exitstatus=$?
+if [ $exitstatus = 0 ];then
+
+###Check if input is empty###
+	if [ -z "$username" ]
+	then
+    		whiptail --title "ERRRORRR" --msgbox "Invalid Input :(" 8 78
+        	./menu
+	fi
+
+                                       ##Check if usename exist or not##
+	
+          sudo id $username &> /dev/null
+	if [ $? -eq 0 ] 
+	then
+
+	menu=$(whiptail --title "Modify User" --menu "Choose an option" 25 78 16 \
+		"<<BACK" "Back To Main Menu" \
+		"Home Dir" "new home directory for the user account" \
+		"UID" "Change UID for the user account" \
+		"Expire Date" "set account expiration date to EXPIRE_DATE" \
+		"Primary Group" "force use GROUP as new primary group" \
+		"Secondary Group" "new list of supplementary groups" \
+		"Append Group" "append the user to the supplemental groups" \
+		"Shell" "new login shell for the user account"  3>&1 1>&2 2>&3)
+
+
+	case $menu in
+     		"<<BACK") ./menu ;;
+	     	"Home Dir") source ./modify-user-homedir ;;
+		"UID") source ./modify-user-id ;;
+      		"Expire Date") source ./modify-user-expiredate ;;
+		"Primary Group") source ./modify-user-primary-group ;;
+		"Secondary Group") source ./modify-user-secondary-group ;;
+		"Append Group") source ./modify-user-append-group ;;
+		"Shell") source ./modify-user-shell ;;
+	esac
+
+	else
+	whiptail --title "ERORRRR" --msgbox "User $username is not existed" 8 78
+	./menu
+	fi
+
+
+
+else
+ ./menu
+fi

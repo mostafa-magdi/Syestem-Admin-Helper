@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Get all users from /etc/passwd except service or system users
+users=$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd)
+
+# Display the users using whiptail
+whiptail --scrolltext --title "List of Users" --msgbox "$users" 20 78
+
+if [ $? -eq 0 ]
+then
+./menu
+fi 

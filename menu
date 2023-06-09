@@ -1,0 +1,38 @@
+#!/bin/bash
+
+###Check that only root can run this script###
+if [ $(id -u) -eq 0 ]
+then 
+
+menu=$(whiptail --title "Main Menu" --menu "                      Welcome To Admin Helper" 25 75 17 \
+"Add User" "Add a user to the system" \
+"List Users" "List all users on the system" \
+"Delete User" "Delete an existing user" \
+"Modify User" "Modify an existing user" \
+"Enable User" "Unlock the user account" \
+"Disable User" "Lock the user account" \
+"Change Password" "Change Password of an existing user" \
+"Add Group" "Add a user group to the system" \
+"List Groups" "List all groups on the system" \
+"Delete Group" "Delete an existing group" 3>&1 1>&2 2>&3)
+
+
+case $menu in
+
+  "Add User") ./add_user ;;
+  "List Users") ./list_users ;;
+  "Delete User") ./delete_user ;;
+  "Modify User") ./modify_user ;;
+  "Enable User") ./enable_user ;;
+  "Disable User") ./disable_user ;;
+  "Change Password") ./change-password ;;
+  "Add Group") ./add_group ;;
+  "List Groups") ./list_groups ;;
+  "Delete Group") ./delete_group ;;
+
+esac
+
+else
+whiptail --title "ALARRM" --msgbox "Sorry Only Root Can Run This Script :(" 8 78
+
+fi

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+username=$(whiptail --inputbox "Enter a user you want to delete" 8 39 --title "Delete User" 3>&1 1>&2 2>&3)
+# A trick to swap stdout and stderr.
+# Again, you can pack this inside if, but it seems really long for some 80-col terminal users.
+
+exitstatus=$?
+if [ $exitstatus = 0 ]; then
+sudo id $username &> /dev/null
+if [ $? -eq 0 ] 
+then
+sudo userdel -r $username &> /dev/null
+whiptail --title "Done" --msgbox "User $username is deleted successfully" 8 78
+./menu
+else
+whiptail --title "OOPS" --msgbox "User $username is not existed" 8 78
+./menu
+fi
+
+else
+ ./menu
+fi
+

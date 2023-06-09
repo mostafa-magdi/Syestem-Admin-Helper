@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Get the username from the user
+username=$(whiptail --inputbox "Enter the username:" 8 78 --title "Modify Primary Group" 3>&1 1>&2 2>&3)
+
+# Check if the user exists
+if ! id -u $username > /dev/null 2>&1; then
+    whiptail --msgbox "User $username does not exist." 8 78
+    ./menu
+fi
+
+# Get the new primary group from the user
+new_primary_group=$(whiptail --inputbox "Enter the new primary group:" 8 78 --title "Modify Primary Group" 3>&1 1>&2 2>&3)
+
+# Check if the group exists
+if ! getent group $new_primary_group > /dev/null 2>&1; then
+    whiptail --msgbox "Group $new_primary_group does not exist." 8 78
+    ./menu
+fi
+
+status=$?
+if [ $status=0 ];then
+
+# Modify the primary group for the user
+usermod -g $new_primary_group $username
+
+# Display a message to the user
+whiptail --msgbox "Primary group for $username has been modified to $new_primary_group." 8 78
+else
+./menu
+fi

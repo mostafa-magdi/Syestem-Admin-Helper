@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Get the username
+username=$(whiptail --inputbox "Enter username" 8 78 --title "Modify Secondary Group" 3>&1 1>&2 2>&3)
+
+# Get the new group name
+new_secondary_group=$(whiptail --inputbox "Enter new group name" 8 78 --title "Modify Secondary Group" 3>&1 1>&2 2>&3)
+
+# Check if the group exists
+if getent group $new_secondary_group >/dev/null; then
+    # Modify the secondary group of the user
+    usermod -aG $new_secondary_group $username
+   whiptail --msgbox "Secondary group for $username has been modified to $new_secondary_group." 8 78
+
+      ./menu
+
+else
+    whiptail --msgbox "Group $new_secondary_group does not exist." 8 78
+
+	./menu
+fi

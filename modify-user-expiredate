@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Get the username from the user
+username=$(whiptail --inputbox "Enter the username:" 8 78 --title "Modify User Expiration Date" 3>&1 1>&2 2>&3)
+
+# Get the new expiration date from the user
+new_date=$(whiptail --inputbox "Enter the new expiration date (YYYY-MM-DD):" 8 78 --title "Modify User Expiration Date" 3>&1 1>&2 2>&3)
+
+# Modify the user's expiration date
+sudo chage -E $new_date $username
+
+# Display a message to the user
+whiptail --msgbox "The expiration date for $username has been updated to $new_date." 8 78 --title "Modify User Expiration Date"

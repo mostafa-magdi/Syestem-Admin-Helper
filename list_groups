@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Get all groups from /etc/group except service or system groups
+groups=$(awk -F: ' {print $1}' /etc/group)
+# Display the groups using whiptail
+whiptail --scrolltext --title "List of Groups" --msgbox "$groups" 20 78
+if [ $? -eq 0 ]
+then
+./menu
+fi 
+

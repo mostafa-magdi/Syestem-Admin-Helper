@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Get the username from the user
+username=$(whiptail --inputbox "Enter the username:" 8 78 --title "Modify Home Directory" 3>&1 1>&2 2>&3)
+
+# Get the new home directory from the user
+new_home_dir=$(whiptail --inputbox "Enter the new home directory:" 8 78 --title "Modify Home Directory" 3>&1 1>&2 2>&3)
+
+# Modify the home directory for the user
+status=$?
+if [ $status=0 ];then
+usermod -d $new_home_dir $username
+
+# Display a message to the user
+whiptail --msgbox "Home directory for $username has been modified to $new_home_dir." 8 78
+else
+./menu
+fi
+
